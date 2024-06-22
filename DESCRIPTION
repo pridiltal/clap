@@ -10,4 +10,7 @@ Encoding: UTF-8
 LazyData: true
 Imports:
     mclust,
-    FNN
+    FNN,
+    dplyr
+Suggests:
+    ggplot2
