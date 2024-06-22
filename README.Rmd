@@ -1,32 +1,38 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
 
 # clap
 
 <!-- badges: start -->
 <!-- badges: end -->
+The issue of overlapping regions in multidimensional data arises when different classes or clusters share similar feature representations, making it challenging to delineate distinct boundaries between them accurately. This package provides methods for detecting and visualizing these overlapping regions using partitional clustering techniques based on nearest neighbor distances.
 
-The issue of overlapping regions in multidimensional data arises when
-different classes or clusters share similar feature representations,
-making it challenging to delineate distinct boundaries between them
-accurately. This package provides methods for detecting and visualizing
-these overlapping regions using partitional clustering techniques based
-on nearest neighbor distances.
 
 ## Installation
 
-You can install the development version of clap from
-[GitHub](https://github.com/) with:
+You can install the development version of clap from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("pridiltal/clap")
 ```
 
+
 ## Installation
 
-You can install the development version of clap from
-[GitHub](https://github.com/) with:
+You can install the development version of clap from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
@@ -35,7 +41,8 @@ devtools::install_github("pridiltal/clap")
 
 ## Example
 
-``` r
+
+```{r}
 library(clap)
 class1 <- matrix(rnorm(100, mean = 0, sd = 1), ncol = 2) + matrix(rep(c(1, 1), each = 50), ncol = 2)
 class2 <- matrix(rnorm(100, mean = 0, sd = 1), ncol = 2) + matrix(rep(c(-1, -1), each = 50), ncol = 2)
@@ -48,11 +55,6 @@ p <- ggplot2::ggplot(training, ggplot2::aes(x = X1, y = X2, color = class)) +
 ggplot2::geom_point() +
 ggplot2::labs(title = "Dummy Data with Overlapping Classes")
 print(p)
-```
-
-<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
-
-``` r
 
 # Perform clustering
 cluster_result <- perform_clustering(training, class_column = class)
@@ -67,4 +69,3 @@ p2 <- p + ggplot2::geom_point(data = overlapdata, ggplot2::aes(X1, X2), colour =
 (p2)
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-2.png" width="100%" />
