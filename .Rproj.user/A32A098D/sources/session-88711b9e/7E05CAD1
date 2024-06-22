@@ -3,7 +3,7 @@
     "path": "D:/P-home/R_packages/clap/.Rbuildignore",
     "project_path": ".Rbuildignore",
     "type": "text",
-    "hash": "0",
+    "hash": "3238171100",
     "contents": "",
     "dirty": false,
     "created": 1719047690030.0,
@@ -14,11 +14,11 @@
         "Source": "Source"
     },
     "folds": "",
-    "lastKnownWriteTime": 1719047680,
+    "lastKnownWriteTime": 1719048133,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1719047680,
+    "last_content_update": 1719048134011,
     "read_only": false,
     "read_only_alternatives": []
 }
