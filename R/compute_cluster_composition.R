@@ -1,24 +1,35 @@
 #' Compute cluster composition and filter based on percentage
 #'
+#' This function computes the cluster composition based on the input object of class 'clap' returned by perform_clustering function.
+#' It merges the data and cluster assignments, computes cluster composition statistics including counts, IDs, and percentages,
+#' and filters based on the specified percentage threshold.
+#'
 #' @param x An object of class 'clap' returned by perform_clustering function,
 #'        containing members (list of clusters), cluster_df (data frame of cluster assignments),
 #'        and the original dataset.
 #' @return  filtered data frame summarizing cluster composition with class 'clap'.
 #' @import dplyr
-#' @example
-#' class1 <- matrix(rnorm(100, mean = 0, sd = 1), ncol = 2) + matrix(rep(c(1, 1), each = 50), ncol = 2)
-#' class2 <- matrix(rnorm(100, mean = 0, sd = 1), ncol = 2) + matrix(rep(c(-1, -1), each = 50), ncol = 2)
-#' datanew <- rbind(class1, class2)
-#' training <- data.frame(datanew, class = factor(c(rep(1, 50), rep(2, 50))))
+#' @examples
+#' if (requireNamespace("ggplot2", quietly = TRUE)) {
+#'   # Generate dummy data
+#'   class1 <- matrix(rnorm(100, mean = 0, sd = 1), ncol = 2) +
+#'     matrix(rep(c(1, 1), each = 50), ncol = 2)
+#'   class2 <- matrix(rnorm(100, mean = 0, sd = 1), ncol = 2) +
+#'     matrix(rep(c(-1, -1), each = 50), ncol = 2)
+#'   datanew <- rbind(class1, class2)
+#'   training <- data.frame(datanew, class = factor(c(rep(1, 50), rep(2, 50))))
 #'
-#' # Plot the dummy data to visualize overlaps
-#' p <- ggplot(training, aes(x = X1, y = X2, color = class)) +
-#' geom_point() +
-#' labs(title = "Dummy Data with Overlapping Classes")
-#' print(p)
+#'   # Plot the dummy data to visualize overlaps
+#'   p <- ggplot2::ggplot(training, ggplot2::aes(x = X1, y = X2, color = class)) +
+#'     ggplot2::geom_point() +
+#'     ggplot2::labs(title = "Dummy Data with Overlapping Classes")
+#'   print(p)
 #'
-#' # Compute cluster composition
-#' composition <- compute_cluster_composition(cluster_result)
+#'   # Perform clustering
+#'   cluster_result <- perform_clustering(training, class_column = class)
+#'   # Compute cluster composition
+#'   composition <- compute_cluster_composition(cluster_result)
+#' }
 #' @export
 compute_cluster_composition <- function(x) {
 

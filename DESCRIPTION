@@ -1,6 +1,6 @@
 Package: clap
 Type: Package
-Title: Detecting Overlapping Regions in Multidimensional Data
+Title: Detecting Class Overlapping Regions in Multidimensional Data
 Version: 0.1.0
 Author: Priyanga Dilini Talagala
 Maintainer: Priyanga Dilini Talagala <pritalagala@gmail.com>
@@ -11,6 +11,9 @@ LazyData: true
 Imports:
     mclust,
     FNN,
-    dplyr
+    dplyr,
+    stats,
+    rlang
 Suggests:
     ggplot2
+RoxygenNote: 7.3.1

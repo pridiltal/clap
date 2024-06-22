@@ -1,38 +1,51 @@
 #' Perform clustering based on nearest neighbor distances
 #'
+#' @details This function first removes the specified class column from the data, calculates the nearest neighbor distances, and then performs clustering using a radius based on the maximum nearest neighbor distance.
+#'
 #' @param data A numeric matrix or data frame of data points.
 #' @param class_column A character string or unquoted name specifying the name of the column containing class labels.
-#' @return A list containing members (list of clusters) and cluster_df
-#' (data frame of cluster assignments).
+#' @return An object of class 'clap' containing:
+#' \describe{
+#'   \item{members}{A list of clusters with their respective data point IDs.}
+#'   \item{cluster_df}{A data frame with cluster assignments for each data point.}
+#'   \item{data}{The original dataset.}
+#' }
 #' @importFrom mclust partuniq
 #' @importFrom FNN get.knnx
-#' @example
-#' class1 <- matrix(rnorm(100, mean = 0, sd = 1), ncol = 2) + matrix(rep(c(1, 1), each = 50), ncol = 2)
-#' class2 <- matrix(rnorm(100, mean = 0, sd = 1), ncol = 2) + matrix(rep(c(-1, -1), each = 50), ncol = 2)
-#' datanew <- rbind(class1, class2)
-#' training <- data.frame(datanew, class = factor(c(rep(1, 50), rep(2, 50))))
+#' @importFrom stats dist
+#' @importFrom dplyr select
+#' @importFrom rlang enquo
+#' @examples
+#' if (requireNamespace("ggplot2", quietly = TRUE)) {
+#'   # Generate dummy data
+#'   class1 <- matrix(rnorm(100, mean = 0, sd = 1), ncol = 2) +
+#'     matrix(rep(c(1, 1), each = 50), ncol = 2)
+#'   class2 <- matrix(rnorm(100, mean = 0, sd = 1), ncol = 2) +
+#'     matrix(rep(c(-1, -1), each = 50), ncol = 2)
+#'   datanew <- rbind(class1, class2)
+#'   training <- data.frame(datanew, class = factor(c(rep(1, 50), rep(2, 50))))
 #'
-#' # Plot the dummy data to visualize overlaps
-#' p <- ggplot(training, aes(x = X1, y = X2, color = class)) +
-#' geom_point() +
-#' labs(title = "Dummy Data with Overlapping Classes")
-#' print(p)
-#' cluster_result <- perform_clustering(training, class_column = class)
+#'   # Plot the dummy data to visualize overlaps
+#'   p <- ggplot2::ggplot(training, ggplot2::aes(x = X1, y = X2, color = class)) +
+#'     ggplot2::geom_point() +
+#'     ggplot2::labs(title = "Dummy Data with Overlapping Classes")
+#'   print(p)
+#'
+#'   # Perform clustering
+#'   cluster_result <- perform_clustering(training, class_column = class)
+#' }
+#'
 #' @export
 perform_clustering <- function(data, class_column = NULL) {
 
   originaldata <- data
 
-  # Convert class_column to character if it's not already
-  class_column <- as.character(substitute(class_column))
-
-  # Extract the numerical columns
-  if (!is.null(class_column)) {
-    data <- data[, !names(data) %in% class_column, drop = FALSE]
-  }
+  class_column <- rlang::enquo(class_column)
+  data <- data |>
+    dplyr::select(-!!class_column)
 
   # Calculate the distance matrix for the data
-  distance_matrix <- as.matrix(dist(data))
+  distance_matrix <- as.matrix(stats::dist(data))
 
   # Function to find the nearest neighbor distance for each point
   nearest_neighbor_distance <- function(distances) {
@@ -62,7 +75,8 @@ perform_clustering <- function(data, class_column = NULL) {
 
   # Perform clustering based on nearest neighbors
   for (i in 2:num_points) {
-    knn_result <- FNN::get.knnx(data[exemplars, , drop = FALSE], data[i, , drop = FALSE], k = 1)
+    knn_result <- FNN::get.knnx(data[exemplars, , drop = FALSE],
+                                data[i, , drop = FALSE], k = 1)
     nearest_exemplar_index <- knn_result$nn.index[1, 1]
     nearest_distance <- knn_result$nn.dist[1, 1]
 
