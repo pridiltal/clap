@@ -1,0 +1,36 @@
+Package: conduits
+Title: Conditional User Interface for Time Series Normalisation 
+Version: 1.0.0
+Authors@R: c( person("Puwasala", "Gamakumara", email = "puwasala.gamakumara@gmail.com", role= c("aut")),
+    person("Priyanga Dilini", "Talagala", email= "pritalagala@gmail.com", role= c("aut", "cre"),  comment = c(ORCID = "0000-0003-2870-7449")),
+    person("Rob J.", "Hyndman", role= c("aut"), comment = c(ORCID = "0000-0002-2140-5352")) )
+Description: Provide a user interface for conditionally normalising a time series. We introduce a novel approach to normalize time series data conditional on a set of covariates. We do this by modeling the conditional mean and the conditional variance of the time series with generalized additive models using a set of covariates. The conditional mean and variance are then used to normalize the time series. It also includes functions to calculate conditional cross-correlation, conditional auto-correlation and estimate time delay between two sensors.  
+License: GPL-3
+LazyData: true 
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Imports:
+    broom,
+    dplyr,
+    mgcv,
+    purrr,
+    rlang,
+    scales,
+    splines,
+    stats,
+    tibble,
+    tidyr,
+    tsibble, 
+    feasts
+Depends: 
+    R (>= 4.1.0)
+Suggests:
+    fable,
+    knitr,
+    mgcViz,
+    rmarkdown,
+    patchwork
+Encoding: UTF-8
+URL: https://github.com/PuwasalaG/conduits
+BugReports: https://github.com/PuwasalaG/conduits/issues
+
