@@ -6,7 +6,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-## Overview
+## clap: Detecting Class Overlapping Regions in Multidimensional Data
 
 The issue of overlapping regions in multidimensional data arises when
 different classes or clusters share similar feature representations,
