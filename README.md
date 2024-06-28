@@ -1,10 +1,12 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# clap
+# clap <img src="man/figures/logo.png" align="right" width = 150 />
 
 <!-- badges: start -->
 <!-- badges: end -->
+
+## Overview
 
 The issue of overlapping regions in multidimensional data arises when
 different classes or clusters share similar feature representations,
