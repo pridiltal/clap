@@ -4,6 +4,10 @@
 # clap <img src="man/figures/logo.png" align="right" width = 150 />
 
 <!-- badges: start -->
+
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/clap)](https://cran.r-project.org/package=clap)
+[![Lifecycle:
+maturing](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 <!-- badges: end -->
 
 ## clap: Detecting Class Overlapping Regions in Multidimensional Data
